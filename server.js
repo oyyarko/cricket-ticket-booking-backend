@@ -3,14 +3,14 @@ const express = require("express");
 const cors = require("cors");
 const { connectToDB } = require("./db/connect");
 const cookieParser = require("cookie-parser");
-// const { insertDummyBlocks } = require("./utils/insertDummyBlocks");
 const routes = require("./routes/MainRoutes");
-const { createDummySeats } = require("./utils/createDummySeats");
 
-const app = express();
+const { app, server } = require("./socket/socket");
+
+// const app = express();
 const PORT = process.env.PORT;
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   connectToDB();
   console.log("Server is connected", PORT);
   // insertDummyBlocks()

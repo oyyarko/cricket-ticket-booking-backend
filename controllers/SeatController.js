@@ -1,5 +1,6 @@
 const BlockModel = require("../models/BlockModel");
 const SeatModel = require("../models/SeatModel");
+const { io } = require("../socket/socket");
 
 module.exports.Seats = async (req, res, next) => {
   const blockId = req.params.blockId;
@@ -42,6 +43,13 @@ module.exports.SelectSeats = async (req, res, next) => {
         { row, col, block: blockId },
         { status: 1 }
       );
+
+      io.emit("booking", {
+        status: 1,
+        row: row - 1,
+        col: col - 1,
+        block: blockId,
+      });
     }
 
     res.status(200).json({ message: "Seats selected successfully" });
