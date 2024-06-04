@@ -24,6 +24,10 @@ app.use((req, res, next) => {
   next();
 });
 
+app.get("/", (req, res) => {
+  res.send("Hello world")
+})
+
 server.listen(PORT, () => {
   connectToDB();
   console.log("Server is connected", PORT);
