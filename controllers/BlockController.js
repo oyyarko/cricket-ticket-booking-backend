@@ -2,7 +2,7 @@ const BlockModel = require("../models/BlockModel");
 
 module.exports.Block = async (req, res, next) => {
   try {
-    const blocks = await BlockModel.find();
+    const blocks = await BlockModel.find().sort({ name: 1 });
     res.json(blocks);
     next();
   } catch (error) {
