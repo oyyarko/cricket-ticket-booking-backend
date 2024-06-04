@@ -10,7 +10,7 @@ const { app, server } = require("./socket/socket");
 // const app = express();
 const PORT = process.env.PORT;
 
-server.use((req, res, next) => {
+app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*"); // Allow all origins
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE"); // Allow specified methods
   res.header(
@@ -24,7 +24,7 @@ server.use((req, res, next) => {
   next();
 });
 
-server.get("/", (req, res) => {
+app.get("/", (req, res) => {
   res.send("Hello world")
 })
 
@@ -33,7 +33,7 @@ server.listen(PORT, () => {
   console.log("Server is connected", PORT);
 });
 
-server.use(cookieParser());
-server.use(express.json());
+app.use(cookieParser());
+app.use(express.json());
 
-server.use("/", routes);
+app.use("/", routes);
