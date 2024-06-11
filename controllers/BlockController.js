@@ -4,8 +4,7 @@ module.exports.Block = async (req, res, next) => {
   try {
     const blocks = await BlockModel.find()
       .sort({ name: 1 })
-      .select("name")
-      .select("level");
+      .select("name level");
     res.json(blocks);
     next();
   } catch (error) {
