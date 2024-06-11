@@ -19,23 +19,13 @@ module.exports.SelectSeats = async (req, res, next) => {
   try {
     const selectedSeats = req.body;
     const blockId = req.params.blockId;
-    if (!Array.isArray(selectedSeats)) {
-      return res.status(400).json({
-        message: "Invalid request format: selectedSeats must be an array",
-      });
-    }
+
     const block = await BlockModel.findById(blockId);
     if (!block) {
       return res.status(404).json({ message: "Block not found" });
     }
 
     for (const seatSelection of selectedSeats) {
-      if (!Array.isArray(seatSelection) || seatSelection.length !== 2) {
-        return res.status(400).json({
-          message:
-            "Invalid seat selection format: Each seat selection must be an array with two elements [row, col]",
-        });
-      }
       const row = seatSelection[0];
       const col = seatSelection[1];
 
